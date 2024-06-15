@@ -1,0 +1,44 @@
+version: '3'
+
+networks: 
+    dev:
+
+services: 
+    nginx:
+        build:
+            context: ./.docker/nginx
+            dockerfile: Dockerfile
+        container_name: nginx_server
+        ports: 
+            - 8000:8000
+        links: 
+            - php
+        volumes: 
+            - ./src:/var/www/app
+            - ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        networks: 
+            - dev
+
+    php:
+        build:
+            context: ./.docker/php
+            dockerfile: Dockerfile
+        container_name: php_fpm
+        expose:
+            - "9000"
+        volumes: 
+            - ./src:/var/www/app
+        networks: 
+            - dev
+
+    db:
+        image: mongo
+        container_name: mongo_db
+        ports: 
+            - 27017:27017
+        environment: 
+            MONGO_INITDB_ROOT_USERNAME: user
+            MONGO_INITDB_ROOT_PASSWORD: password
+            MONGO_INITDB_DATABASE: testing
+        networks: 
+            - dev

@@ -1,0 +1,17 @@
+# # Ignore development dependencies and files
+# src/node_modules
+# src/public/storage
+# src/storage/*.key
+# src/vendor
+# src/.idea
+
+# # Ignore Docker-related files
+# .dockerignore
+# docker-compose.yml
+# Dockerfile
+
+# # Ignore miscellaneous files
+# *.log
+# *.sql
+# *.sqlite
+# *.swp
