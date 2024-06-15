@@ -33,8 +33,6 @@ RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath gd
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN composer install
-
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
 CMD ["php-fpm"]
